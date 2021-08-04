@@ -2,8 +2,6 @@ from docx import Document
 from os import walk
 from docx2pdf import convert
 
-convert("") # Converts all .docx to .pdf
-
 class Factuur: # Creates an invoice class with everything needed for Excel admin file.
     def __init__(self):
         self.bedrijf = ""
@@ -29,7 +27,8 @@ def extract(fact, table, vb): # Extracts data needed for Excel admin file and st
 
 def wordext(): # Sends factuur_list to main
     docs = []
-    filenames = next(walk("."), (None, None, []))[2]
+    waar = input("Vul de path van de folder in: ")
+    filenames = next(walk(f"{waar}"), (None, None, []))[2]
     for i in filenames:
         if ".docx" in i:
             docs.append(i)
@@ -43,6 +42,7 @@ def wordext(): # Sends factuur_list to main
         table = vb.tables
         extract(factuur, table, vb)
         factuur_list.append(factuur)
+    convert(f"{waar}") # Converts all .docx to .pdf
     return factuur_list
 
 

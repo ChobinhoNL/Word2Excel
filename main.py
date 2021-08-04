@@ -1,29 +1,33 @@
 from wordextractor import wordext
 import xlsxwriter
 
-factuurlist = wordext() # Getting a list with the class-data per invoice.
-a = 0
-length = len(factuurlist)
+def main():
+    factuurlist = wordext() # Getting a list with the class-data per invoice.
+    a = 0
+    length = len(factuurlist)
 
-for i in factuurlist:
-    print(i)
+    for i in factuurlist:
+        print(i)
 
-# Create a workbook and add a worksheet.
-wb = xlsxwriter.Workbook('admin.xlsx')
-ws = wb.add_worksheet()
+    # Create a workbook and add a worksheet.
+    wb = xlsxwriter.Workbook('admin.xlsx')
+    ws = wb.add_worksheet()
 
-# Start from the first cell. Rows and columns are zero indexed.
-row = 0
-col = 0
+    # Start from the first cell. Rows and columns are zero indexed.
+    row = 0
+    col = 0
 
-while length != 0:
-    ws.write(row, col, factuurlist[a].datum)
-    ws.write(row, col+1, factuurlist[a].fnummer)
-    ws.write(row, col+2, factuurlist[a].bedrijf)
-    ws.write(row, col+5, factuurlist[a].incl)
-    length -= 1
-    a += 1
-    row += 1
+    while length != 0:
+        ws.write(row, col, factuurlist[a].datum)
+        ws.write(row, col+1, factuurlist[a].fnummer)
+        ws.write(row, col+2, factuurlist[a].bedrijf)
+        ws.write(row, col+5, factuurlist[a].incl)
+        length -= 1
+        a += 1
+        row += 1
 
 
-wb.close()
+    wb.close()
+
+if __name__ == '__main__':
+    main()
