@@ -2,7 +2,8 @@ from wordextractor import wordext
 import xlsxwriter
 
 def main():
-    factuurlist = wordext() # Getting a list with the class-data per invoice.
+    waar = str(input("Vul de path van de folder in: "))
+    factuurlist = wordext(waar) # Getting a list with the class-data per invoice.
     a = 0
     length = len(factuurlist)
 
@@ -10,7 +11,7 @@ def main():
         print(i)
 
     # Create a workbook and add a worksheet.
-    wb = xlsxwriter.Workbook('admin.xlsx')
+    wb = xlsxwriter.Workbook(f'{waar}\Admin.xlsx')
     ws = wb.add_worksheet()
 
     # Start from the first cell. Rows and columns are zero indexed.
